@@ -1,7 +1,8 @@
 package redis
 
 import (
-	"gopkg.in/redis.v6"
+	"github.com/go-redis/redis"
+	"fmt"
 )
 
 type Config struct {
@@ -21,6 +22,8 @@ func NewRedis(config Config) *redis.Client {
 
 	if pong, err := RDB.Ping().Result(); err != nil {
 		panic("redis connect fail:" + err.Error())
+	}else{
+	   fmt.Println("PONG:",pong)
 	}
 	return RDB
 }
