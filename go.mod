@@ -1,9 +1,5 @@
 module github.com/JxGolibs/redis
 
-go 1.13
+go 1.14
 
-// require (
-// 	github.com/go-redis/redis v6.15.6
-// )
-
-require github.com/go-redis/redis v6.15.6+incompatible // indirect
+require github.com/go-redis/redis v6.15.9+incompatible

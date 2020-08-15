@@ -2,16 +2,18 @@ package redis
 
 import (
 	"fmt"
-	goredis "github.com/go-redis/redis"
 	"math/big"
 	"strconv"
 	"strings"
+
+	goredis "gopkg.in/redis.v3"
+	// goredis "github.com/go-redis/redis"
 )
 
 type Config struct {
 	Addr     string `default:":6379"`
 	Password string // no password set
-	DB       int    `default:"0"` // use default DB
+	DB       int64  `default:"0"` // use default DB
 	Prefix   string
 }
 
@@ -32,7 +34,7 @@ func NewRedis(config Config) *RedisClient {
 		prefix: config.Prefix,
 	}
 
-	if pong, err := RDB.Ping().Result(); err != nil {
+	if pong, err := RDB.Client.Ping().Result(); err != nil {
 		panic("redis connect fail:" + err.Error())
 	} else {
 		fmt.Println("PONG:", pong)
